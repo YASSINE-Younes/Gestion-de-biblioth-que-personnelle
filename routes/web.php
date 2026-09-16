@@ -29,8 +29,8 @@ Route::get('/dashboard', function () {
 
 
 // Route Resource Categories
-Route::resource('categories' , CategoryController::class)->middleware('auth');
-// Route::resource('categories' , CategoryController::class);
+Route::resource('categories' , CategoryController::class)->except('show')->middleware('auth');
+ 
 
 
 
