@@ -7,6 +7,8 @@
     <div class="py-12">
 
 
+
+
         <!DOCTYPE html>
         <html lang="en">
 
@@ -20,33 +22,38 @@
         </head>
 
         <body>
-            @if (session('status-store-category'))
-                <span style="color:green;">{{ session('status-store-category') }}</span>
+
+
+
+            @if (session('status-update-category'))
+                <div class="alert alert-success w-50">
+                    {{ session('status-update-category') }}
+                </div>
             @endif
 
-            <form method="POST" action="{{ route('categories.store') }}">
+            <form action="{{ route('categories.update', $category) }}" method="POST">
                 @csrf
+                @method('PUT')
+
+                <label>Name</label>
+                <input type="text" name ="name" value="{{ old('name', $category->name) }}" />
 
 
-                <label for="">Name</label>
-                <input type="text" name="name" value="{{ old('name') }}" />
+                <button type="submit" class="btn btn-primary">Modifier</button>
 
-                <button type="submit" class="btn btn-success">Ajouter</button>
-                <br>
+                <!-- Start Error Message -->
                 @error('name')
-                    <span style="color:red;">{{ $message }}</span>
+                    <div class="text-danger small">{{ $message }}</div>
                 @enderror
-
+                <!-- End Error Message -->
             </form>
+
 
             {{-- CDN BOOTSRAP  --}}
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
         </body>
 
         </html>
-
-
-
 
     </div>
 </x-app-layout>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use  App\Http\Requests\StoreCategoryRequest;
+use  App\Http\Requests\EditCategoryRequest;
+
 
 
 
@@ -25,6 +27,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('categories.create');
+        
     }
 
     /**
@@ -51,15 +54,20 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+      return view('categories.edit',compact('category'));
+  
+
+
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(EditCategoryRequest $request, Category $category)
     {
-        //
+       $category->update($request->validated());
+       return back()->with('status-update-category' , 'Category Modifier Avec Success');
     }
 
     /**
@@ -67,6 +75,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // $category->destroy($category);
+        $category->delete();
+        return back()->with('status-delete-category' , 'Category Supprimer Avec Success');
     }
 }
