@@ -32,7 +32,9 @@
                 <input type="text" name="name" value="{{ old('name') }}" />
 
                 <button type="submit" class="btn btn-success">Ajouter</button>
+                
                 <br>
+
                 @error('name')
                     <span style="color:red;">{{ $message }}</span>
                 @enderror

@@ -10,6 +10,12 @@ class Book extends Model
     use HasFactory;
 
 
+
+    //Fields
+    protected $fillable = ['title' ,'author' , 'description' ,'image' ,'status' ,'category_id' ,'user_id'];
+            
+
+
     // Function One Book BelongsTo One Category
     public function category()
     {
